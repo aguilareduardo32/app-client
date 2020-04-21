@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import AuthService from '../auth/auth-service';
 
-class Navbar extends Component {
+class Fooot extends Component {
     constructor(props){
         super(props);
         this.state = { loggedInUser: null};
@@ -23,17 +23,13 @@ class Navbar extends Component {
         if(this.state.loggedInUser){
             return(
                 
-                    <nav className="nav-style">
-                        <ul>
-                            <li>Welcome, {this.state.loggedInUser.username}</li>
-                          
-                             {/*<li>
+                    <footer >
+                        
                                 <Link   to='/'>
                                     <button className="loginsub2" onClick={() => this.logoutUser()}>Logout</button>
                                 </Link>
-                            </li> */}
-                        </ul>
-                    </nav>
+                          
+                    </footer>
                 
             )
         } else {
@@ -52,4 +48,4 @@ class Navbar extends Component {
     }
 }
 
-export default Navbar;
+export default Fooot;

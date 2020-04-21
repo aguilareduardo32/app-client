@@ -2,21 +2,47 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import AddTrip from './AddTrip';
+import Background1 from '../images/carpool1.jpg'
+import '../../css/tripList.css'
+import AuthService from '../auth/auth-service';
+
+
+var sectionStyle = {
+    width: '100%',
+    height: '800px',
+    backgroundImage: `url(${Background1})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover' ,
+    
+    
+  
+  };
 
 
 class TripList extends Component {
     
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
              listOfTrips: [],
-             showAddForm: false
-             };
-        this._onButtonClick = this._onButtonClick.bind(this)
+             showAddForm: false,
+           
+            };
+        this.service = new AuthService();
+    
+    };
+       
+    
+    logoutUser = () => {
+        this.service.logout()
+        .then(() => {
+            this.setState({ loggedInUser: null });
+            
+        })
     }
     
     getAllTrips = () => {
-        axios.get(`http://localhost:5000/trip/trips`,{withCredentials:true})
+        axios.get(`${process.env.REACT_APP_API_URL}/trip/trips`,{withCredentials:true})
         .then(responseFromApi => {
              this.setState({
               listOfTrips: responseFromApi.data
@@ -28,36 +54,40 @@ class TripList extends Component {
         this.getAllTrips();
     }
 
-    _onButtonClick() {
-        this.setState({
-            showAddForm: true
-        });
-    }
+   
 
     pilotCheck = () => {
 
          if(this.props.loggedInUser.rol  === "PILOT"){
             return(
-                <div>
-                    <Link to={`/trip/create`}>Create trip</Link>  
-                  
-                    <div style={{width: '60%', float:"left"}}>
+                 <div>
+                 <br/>
+                    <Link className="loginsub2" to={`/trip/create`} >Create trip 🚗</Link>  
+                    <br/>
+                    <br/>
                         <h3>Trip List</h3>
+                        <br/>
                         { this.state.listOfTrips.map( trip => {
                             return ( 
-                                    <div key={trip._id}>
+                              
+                                    <div class="card1" key={trip._id}>
+                                    <div class="container">
+                                    <br/>
                                         <p>date: {trip.dayOfTheTrip}</p>
-                                        <p>leaveBetween: {trip.leaveBetween}</p>
-                                        <p>from:  {trip.from}</p>
+                                        <p>leave at: {trip.leaveBetween}</p>
+                                        <p>starting point zone:  {trip.startingPointZone}</p>
+                                        <p>starting point adress number:  {trip.startingPointAdressNumber}</p>
                                         <p>pilot name: {trip.pilot.username}</p>
                                         <p>register copilots { trip.copilots.length }/ {trip.availableSeats}</p>
-                                        <Link to={`/trip/${trip._id}`}>Check trip details</Link>
+                                        <br/>
+                                        <Link className="loginsub2" to={`/trip/${trip._id}`}>Check trip details</Link>
+                                    </div>
                                     </div>
                                 )
                             })
                         }
-                    </div> 
-                </div>
+                 </div> 
+            
     
             )
         }
@@ -68,17 +98,25 @@ class TripList extends Component {
         if(this.props.loggedInUser.rol  === "COPILOT"){
             return(
               
-                 <div style={{width: '60%'}}>
+                 <div >
+                 <br/>
+                 
                     <h3>Trip List</h3>
+                    <br/>
                     { this.state.listOfTrips.map( trip => {
                         return ( 
                                 <div key={trip._id}>
+                                <br/>
                                     <p>pilotname: {trip.pilot.username}</p>
-                                    <p>leaveBetween: {trip.leaveBetween}</p>
+                                    <p>leave At: {trip.leaveBetween}</p>
                                     <p> date: {trip.dayOfTheTrip}</p>
-                                    <p>from: {trip.from}</p>
+                                    <p>starting point zone:  {trip.startingPointZone}</p>
+                                    <p>starting point adress number:  {trip.startingPointAdressNumber}</p>
                                      <p>register copilots { trip.copilots.length }/ {trip.availableSeats}</p>
-                                    <Link to={`/trip/${trip._id}`}>Check trip details</Link>
+                                     
+                                    <Link style={{ textDecoration: 'none',
+                color: 'black' }} className="loginsub2" to={`/trip/${trip._id}`}>trip details</Link>
+                                    <br/>
                                 </div>
                              )
                         })
@@ -95,14 +133,15 @@ class TripList extends Component {
     
     render() {
         return(
-          <div>
+          <section style={ sectionStyle }>
                 <div>
                     {this.copilotCheck(this.state)}
                 </div>
                 <div>
                      {this.pilotCheck(this.state)}
                 </div>
-          </div>  
+                
+                </section>
         )
     }
 }

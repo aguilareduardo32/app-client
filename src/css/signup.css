@@ -1,0 +1,22 @@
+.signup-form{
+  display: block;
+}
+
+.signUpI {
+    
+    border:none;
+    border-bottom:1px solid #ccc;
+
+}
+
+.links {
+    text-decoration: none;
+}
+
+
+.profileTag {
+  
+    border-bottom:1px solid black;
+   
+}
+

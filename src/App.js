@@ -91,7 +91,7 @@ class App extends Component {
       <Fooot userInSession={this.state.loggedInUser} getUser={this.getTheUser}/>
       <Switch>
         <Route exact path="/signup" render={props => <Signup {...props} getUser={this.getTheUser}/>}/>
-        <Route exact path='/' render={props => <Login {...props} getUser={this.getTheUser}/>}/>
+        <Route exact path='/login' render={props => <Login {...props} getUser={this.getTheUser}/>}/>
      
         <ProtectedRoute user={this.state.loggedInUser} path="/trip/trips" component={TripList}/>
         <ProtectedRoute user={this.state.loggedInUser} path="/trip/:id" component={TripDetails} />

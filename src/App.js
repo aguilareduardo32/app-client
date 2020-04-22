@@ -72,7 +72,7 @@ class App extends Component {
             <Navbar userInSession={this.state.loggedInUser} getUser={this.getTheUser}/>
             
             <Switch>
-            <Route exact path='/' render={props => <Login {...props} getUser={this.getTheUser}/>}/>
+            <Route exact path='/login' render={props => <Login {...props} getUser={this.getTheUser}/>}/>
               <ProtectedRoute user={this.state.loggedInUser} path="/trip/create" component={AddTrip}/>
               <ProtectedRoute user={this.state.loggedInUser} path="/trip/trips" component={TripList}/>
               <ProtectedRoute user={this.state.loggedInUser} path="/trip/:id" component={TripDetails} />
@@ -81,7 +81,7 @@ class App extends Component {
             <br/>
             <br/>
             <br/>
-            <Link className="footer"   to='/'>
+            <Link className="footer"   to='/login'>
                                     <button className="loginsub2" onClick={() => this.logoutUser()}>Logout</button>
                                 </Link>
             

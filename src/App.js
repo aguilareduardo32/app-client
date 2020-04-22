@@ -41,9 +41,13 @@ class App extends Component {
           })
         })
         .catch( err => {
+          if(err){
+
+          
           this.setState({
             loggedInUser: false
           })
+        }
         })
     }
   }
@@ -68,7 +72,7 @@ class App extends Component {
             <Navbar userInSession={this.state.loggedInUser} getUser={this.getTheUser}/>
             
             <Switch>
-            
+            <Route exact path='/' render={props => <Login {...props} getUser={this.getTheUser}/>}/>
               <ProtectedRoute user={this.state.loggedInUser} path="/trip/create" component={AddTrip}/>
               <ProtectedRoute user={this.state.loggedInUser} path="/trip/trips" component={TripList}/>
               <ProtectedRoute user={this.state.loggedInUser} path="/trip/:id" component={TripDetails} />
@@ -88,7 +92,6 @@ class App extends Component {
     return (
       <div className="App">
       <Navbar userInSession={this.state.loggedInUser} getUser={this.getTheUser}/>
-      <Fooot userInSession={this.state.loggedInUser} getUser={this.getTheUser}/>
       <Switch>
         <Route exact path="/signup" render={props => <Signup {...props} getUser={this.getTheUser}/>}/>
         <Route exact path='/' render={props => <Login {...props} getUser={this.getTheUser}/>}/>
@@ -96,6 +99,7 @@ class App extends Component {
         <ProtectedRoute user={this.state.loggedInUser} path="/trip/trips" component={TripList}/>
         <ProtectedRoute user={this.state.loggedInUser} path="/trip/:id" component={TripDetails} />
       </Switch>
+      <Fooot userInSession={this.state.loggedInUser} getUser={this.getTheUser}/>
       </div>
     );
   }

@@ -34,7 +34,7 @@ class TripDetails extends Component {
 
     AddCuCopilot = () => {
       const { params } = this.props.match;
-      axios.put(`http://localhost:5000/trip/${params.id}`, {}, {withCredentials: true})
+      axios.put(`${process.env.REACT_APP_API_URL}/trip/${params.id}`, {}, {withCredentials: true})
       .then( () =>{
        console.log("copilot agregado")
        alert("you are in the trip")
@@ -47,7 +47,7 @@ class TripDetails extends Component {
 
     deleteTrip = () => {
         const { params } = this.props.match;
-        axios.delete(`http://localhost:5000/trip/${params.id}`,{withCredentials:true})
+        axios.delete(`${process.env.REACT_APP_API_URL}/trip/${params.id}`,{withCredentials:true})
         .then( () =>{
             this.props.history.push('/trip/trips'); // !!!         
         })

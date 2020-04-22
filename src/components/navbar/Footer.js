@@ -20,7 +20,7 @@ class Fooot extends Component {
     }
 
     render(){
-        if(this.state.loggedInUser){
+       
             return(
                 
                     <footer >
@@ -32,20 +32,7 @@ class Fooot extends Component {
                     </footer>
                 
             )
-        } else {
-            return(
-               
-                <nav className="nav-style">
-                    <ul>
-                       
-                    
-                    </ul>
-                </nav>
-              
-            )
-        }
-        
-    }
+            }
 }
 
 export default Fooot;

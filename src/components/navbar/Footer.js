@@ -26,7 +26,7 @@ class Fooot extends Component {
                     <footer >
                         
                                 <Link   to='/'>
-                                    <button className="loginsub2" onClick={() => this.logoutUser()}>Loaagout</button>
+                                    <button className="loginsub2" onClick={() => this.logoutUser()}>Loaagit gout</button>
                                 </Link>
                           
                     </footer>

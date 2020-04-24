@@ -37,17 +37,16 @@ class App extends Component {
       this.service.loggedin()
         .then(response => {
           this.setState({
-            loggedInUser: response
+            loggedInUser: response.data
           })
         })
         .catch( err => {
-          if(err){
-
+          
           
           this.setState({
             loggedInUser: false
           })
-        }
+        
         })
     }
   }
@@ -70,18 +69,19 @@ class App extends Component {
         return (
           <div className="App" style={ sectionStyle }>
             <Navbar userInSession={this.state.loggedInUser} getUser={this.getTheUser}/>
-            
+           
+          
             <Switch>
-            <Route exact path='/' render={props => <Login {...props} getUser={this.getTheUser}/>}/>
-              <ProtectedRoute user={this.state.loggedInUser} path="/trip/create" component={AddTrip}/>
-              <ProtectedRoute user={this.state.loggedInUser} path="/trip/trips" component={TripList}/>
-              <ProtectedRoute user={this.state.loggedInUser} path="/trip/:id" component={TripDetails} />
+            
+              <ProtectedRoute user={this.state.loggedInUser}  path="/trips" component={TripList}/>
+              <ProtectedRoute user={this.state.loggedInUser} exact path="/create" component={AddTrip}/>
+              <ProtectedRoute user={this.state.loggedInUser} exact path="/:id" component={TripDetails} />
             </Switch>
             <br/>
             <br/>
             <br/>
             <br/>
-            <Link className="footer"   to='/login'>
+            <Link className="footer"   to='/'>
                                     <button className="loginsub2" onClick={() => this.logoutUser()}>Logout</button>
                                 </Link>
             
@@ -93,11 +93,10 @@ class App extends Component {
       <div className="App">
       <Navbar userInSession={this.state.loggedInUser} getUser={this.getTheUser}/>
       <Switch>
-        <Route exact path="/signup" render={props => <Signup {...props} getUser={this.getTheUser}/>}/>
-        <Route exact path='/' render={props => <Login {...props} getUser={this.getTheUser}/>}/>
-     
-        <ProtectedRoute user={this.state.loggedInUser} path="/trip/trips" component={TripList}/>
-        <ProtectedRoute user={this.state.loggedInUser} path="/trip/:id" component={TripDetails} />
+        <Route exact path='/' render={(props) => <Login {...props} getUser={this.getTheUser}/>}/>
+        <Route exact path="/signup" render={() => <Signup  getUser={this.getTheUser}/>}/>
+        <ProtectedRoute user={this.state.loggedInUser} path="/trips" component={TripList}/>
+        <ProtectedRoute user={this.state.loggedInUser} path="/:id" component={TripDetails} />
       </Switch>
       <Fooot userInSession={this.state.loggedInUser} getUser={this.getTheUser}/>
       </div>

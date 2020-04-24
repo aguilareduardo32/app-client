@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AuthService from './auth-service';
 import { Link } from 'react-router-dom';
-import serviceUp from '../api/service';
+import serviceUp from '../cloudinary/service';
 import GoogleLogin from 'react-google-login';
 import '../../css/signup.css'
 import Background from '../images/carpool.jpg';
@@ -38,7 +38,7 @@ class Signup extends Component {
         
         serviceUp.handleUpload(uploadData)
         .then(response => {
-             console.log('response is: ', response);
+           //  console.log('response is: ', response);
             // after the console.log we can see that response carries 'secure_url' which we can use to update the state 
             this.setState({ profilePic: response.secure_url });
           })
@@ -72,10 +72,10 @@ class Signup extends Component {
                     phone: '',
                     email: '',
                     rol: '',
-                    profilePic:''
+                    profilePic: ''
                     
                 }) 
-                this.props.history.push("/trip/trips")
+                this.props.history.push("/trips")
                 ;
                 this.props.getUser(response)
             })

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import AddTrip from './AddTrip';
 import Background1 from '../images/carpool1.jpg'
 import '../../css/tripList.css'
 import AuthService from '../auth/auth-service';
@@ -42,7 +41,7 @@ class TripList extends Component {
     }
     
     getAllTrips = () => {
-        axios.get(`${process.env.REACT_APP_API_URL}/trip/trips`,{withCredentials:true})
+        axios.get(`${process.env.REACT_APP_API_URL}/trips`,{withCredentials:true})
         .then(responseFromApi => {
              this.setState({
               listOfTrips: responseFromApi.data
@@ -62,7 +61,7 @@ class TripList extends Component {
             return(
                  <div>
                  <br/>
-                    <Link className="loginsub2" to={`/trip/create`} >Create trip 🚗</Link>  
+                    <Link className="loginsub2" to={`/create`} >Create trip 🚗</Link>  
                     <br/>
                     <br/>
                         <h3>Trip List</h3>
@@ -80,7 +79,7 @@ class TripList extends Component {
                                         <p>pilot name: {trip.pilot.username}</p>
                                         <p>register copilots { trip.copilots.length }/ {trip.availableSeats}</p>
                                         <br/>
-                                        <Link className="loginsub2" to={`/trip/${trip._id}`}>Check trip details</Link>
+                                        <Link className="loginsub2" to={`/${trip._id}`}>Check trip details</Link>
                                     </div>
                                     </div>
                                 )
@@ -115,7 +114,7 @@ class TripList extends Component {
                                      <p>register copilots { trip.copilots.length }/ {trip.availableSeats}</p>
                                      
                                     <Link style={{ textDecoration: 'none',
-                color: 'black' }} className="loginsub2" to={`/trip/${trip._id}`}>trip details</Link>
+                color: 'black' }} className="loginsub2" to={`/${trip._id}`}>trip details</Link>
                                     <br/>
                                 </div>
                              )

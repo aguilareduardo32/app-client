@@ -21,7 +21,7 @@ class TripDetails extends Component {
 
     getSingleTrip = () => {
         const { params } = this.props.match;
-        axios.get(`${process.env.REACT_APP_API_URL}/trip/${params.id}`, {withCredentials:true})
+        axios.get(`${process.env.REACT_APP_API_URL}/${params.id}`, {withCredentials:true})
         .then( responseFromApi =>{
            const theTrip = responseFromApi.data;
            this.setState(theTrip)
@@ -34,11 +34,11 @@ class TripDetails extends Component {
 
     AddCuCopilot = () => {
       const { params } = this.props.match;
-      axios.put(`${process.env.REACT_APP_API_URL}/trip/${params.id}`, {}, {withCredentials: true})
+      axios.put(`${process.env.REACT_APP_API_URL}/${params.id}`, {}, {withCredentials: true})
       .then( () =>{
        console.log("copilot agregado")
        alert("you are in the trip")
-       this.props.history.push('/trip/trips');
+       this.props.history.push('/trips');
         // after submitting the form, redirect to '/trips'
           
     })
@@ -47,9 +47,9 @@ class TripDetails extends Component {
 
     deleteTrip = () => {
         const { params } = this.props.match;
-        axios.delete(`${process.env.REACT_APP_API_URL}/trip/${params.id}`,{withCredentials:true})
+        axios.delete(`${process.env.REACT_APP_API_URL}/${params.id}`,{withCredentials:true})
         .then( () =>{
-            this.props.history.push('/trip/trips'); // !!!         
+            this.props.history.push('/trips'); // !!!         
         })
         .catch((err)=>{
             console.log(err)
@@ -133,7 +133,7 @@ class TripDetails extends Component {
                   
 
                   <br></br>  <Link style={{ textDecoration: 'none',
-                color: 'black' }} className="loginsub2"  to={'/trip/trips'}>Back to trips</Link>
+                color: 'black' }} className="loginsub2"  to={'/trips'}>Back to trips</Link>
 
                   
               </div>

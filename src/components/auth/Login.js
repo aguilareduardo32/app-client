@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AuthService from './auth-service';
+import { Route , withRouter} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import '../../css/login.css';
@@ -31,10 +32,13 @@ class Login extends Component {
         this.service.login(username, password)
         .then( response => {
             this.setState({ username: '', password: ''});
-            this.props.getUser(response)
-            this.props.history.push('/trip/trips')
+            this.props.getUser(response);
+          this.props.history.push('/trips');
+        
+
+
         })
-        .catch( error =>  {return alert('check password and user')})
+        .catch( error =>  {return console.log(error)})
     }
 
     handleChange = (event) => {
@@ -50,12 +54,12 @@ class Login extends Component {
                
                 
                 <br/>
-                        <form class="login-form" onSubmit={this.handleFormSubmit}>
+                        <form className="login-form" onSubmit={this.handleFormSubmit}>
                         <h1>Login</h1><br/>
                             <label>Username:   </label>
-                            <input  class="w3-input" type="text" name="username" value={this.state.username} onChange={ e => this.handleChange(e)}/><br/><br/>
+                            <input  className="w3-input" type="text" name="username" value={this.state.username} onChange={ e => this.handleChange(e)}/><br/><br/>
                             <label>Password: </label>
-                            <input class="w3-input" type="password" name="password" value={this.state.password} onChange={ e => this.handleChange(e)} /><br/>
+                            <input className="w3-input" type="password" name="password" value={this.state.password} onChange={ e => this.handleChange(e)}/><br/>
                             <br/><input className="loginsub" type="submit" value="Login"/>
                         </form><br/>
                         

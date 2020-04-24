@@ -17,10 +17,10 @@ class AddTrip extends Component {
         const startingPointZone= this.state.startingPointZone;
         const availableSeats = this.state.availableSeats
        
-        axios.post(`${process.env.REACT_APP_API_URL}/trip/create`, { dayOfTheTrip, leaveBetween, startingPointZone, startingPointAdressNumber, availableSeats}, {withCredentials:true})
+        axios.post(`${process.env.REACT_APP_API_URL}/create`, { dayOfTheTrip, leaveBetween, startingPointZone, startingPointAdressNumber, availableSeats}, {withCredentials:true})
         .then( () => {
             alert("trip created")
-                    this.props.history.push('/trip/trips');
+                    this.props.history.push('/trips');
                 })
                 .catch( error => console.log(error) )
     }
@@ -76,7 +76,7 @@ class AddTrip extends Component {
                 <br/>
                 
                 <Link style={{ textDecoration: 'none',
-                color: 'black' }} className="loginsub2"  to={'/trip/trips'}>Back to trips</Link>
+                color: 'black' }} className="loginsub2"  to={'/trips'}>Back to trips</Link>
                 </div>
         )
     }
